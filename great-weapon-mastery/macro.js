@@ -1,9 +1,11 @@
-function description() {
+function description(attackMod, damageMod) {
     let actor = game.actors.find((a) => a.data.name == "Marcus Tyne");
     let weaponDamage = (25 / 6) * 2;
-    let damage = weaponDamage + actor.data.data.abilities.str.mod + 1;
+    let damage = weaponDamage + actor.data.data.abilities.str.mod + damageMod;
     let attack =
-        actor.data.data.abilities.str.mod + actor.data.data.attributes.prof + 1;
+        actor.data.data.abilities.str.mod +
+        actor.data.data.attributes.prof +
+        attackMod;
 
     function disadvantage(d, t) {
         return Math.ceil(16 + t - d / 2 - (1 / 2) * Math.sqrt(d * (d + 10)));
@@ -54,7 +56,23 @@ function doRoll(gwm) {
 }
 new Dialog({
     title: "Select Great Weapon Mastery",
-    content: description(),
+    content: `
+    <form>
+    <div class="form-group">
+        <label>Bonus Attack</label>
+        <div class="form-control">
+            <input type="number" class="attack" value="0" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Bonus Damage</label>
+        <div class="form-control">
+            <input type="number" class="damage" value="0" />
+        </div>
+    </div>
+    <div class="description">${description(0, 0)}</div>
+</form>
+`,
     buttons: {
         normal: {
             label: "Normal",
@@ -64,5 +82,17 @@ new Dialog({
             label: "+GWM",
             callback: () => doRoll(true),
         },
+    },
+    render: (html) => {
+        function render() {
+            html.find(".description").html(
+                description(
+                    parseFloat(html.find(".attack").val()),
+                    parseFloat(html.find(".damage").val())
+                )
+            );
+        }
+        html.find(".attack").change(render);
+        html.find(".damage").change(render);
     },
 }).render(true);
