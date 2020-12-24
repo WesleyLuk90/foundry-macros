@@ -20,8 +20,8 @@ function description(attackMod, damageMod) {
     }
 
     return `
-<div>Damage +${Math.round(damage * 10) / 10}</div>
 <div>Attack +${Math.round(attack * 10) / 10}</div>
+<div>Damage +${Math.round(damage * 10) / 10}</div>
 <div>Normal &lt ${normal(damage, attack)} AC</div>
 <div>Advantage &lt ${advantage(damage, attack)} AC</div>
 <div>Disadvantage &lt ${disadvantage(damage, attack)} AC</div>
