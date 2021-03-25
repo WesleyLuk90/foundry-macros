@@ -1,6 +1,6 @@
 function description(attackMod, damageMod) {
     let actor = game.actors.find((a) => a.data.name == "Marcus Tyne");
-    let weaponDamage = (25 / 6) * 2;
+    let weaponDamage = 3;
     let damage =
         weaponDamage + actor.data.data.abilities.str.mod + damageMod + 1;
     let attack =
