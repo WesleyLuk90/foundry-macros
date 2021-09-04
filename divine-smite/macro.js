@@ -17,11 +17,11 @@ let d = new Dialog({
             callback: () => doRoll(false, true),
         },
         undead: {
-            label: "vs Undead",
+            label: "vs Undead/Fiend",
             callback: () => doRoll(true, false),
         },
         undeadCrit: {
-            label: "Critical vs Undead",
+            label: "Critical vs Undead/Fiend",
             callback: () => doRoll(true, true),
         },
     },
